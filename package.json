@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "cp ./config-for-each-env/env.development ./.env && cp ./config-for-each-env/constants.development.js ./constants.js nuxt dev",
-    "staging": "cp ./config-for-each-env/env.staging ./.env && cp ./config-for-each-env/constants.staging.js ./constant.js nuxt dev",
-    "prod": "cp ./config-for-each-env/env.production ./.env && cp ./config-for-each-env/constants.production.js ./constant.js nuxt dev",
+    "dev": "cp ./config-for-each-env/env.development ./.env && cp ./config-for-each-env/constants.development.js ./constants.js && nuxt dev",
+    "staging": "cp ./config-for-each-env/env.staging ./.env && cp ./config-for-each-env/constants.staging.js ./constant.js && nuxt dev",
+    "prod": "cp ./config-for-each-env/env.production ./.env && cp ./config-for-each-env/constants.production.js ./constant.js && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"

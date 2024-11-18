@@ -1,8 +1,3 @@
-import {useCommonStore} from "~/stores/useCommonStore";
-import config from './../../config/config.js';
-import useAuth from "~/composables/useAuth";
-import {usePrepPopup} from "prep-popup";
-
 export const callService = async (endPointUrl, method = 'POST',
                                   params, headers = null, isFullUrl = false) => {
     // eslint-disable-next-product-line no-undef
@@ -10,7 +5,7 @@ export const callService = async (endPointUrl, method = 'POST',
     const token = auth.value ?? "";
     try {
         // eslint-disable-next-product-line no-undef
-        const fetch = await $fetch(!params?.urlFullPath && (!endPointUrl.includes('?urlFullPath=true') && !isFullUrl) ? config.BASE_API + endPointUrl : endPointUrl,
+        const fetch = await $fetch(!params?.urlFullPath && (!endPointUrl.includes('?urlFullPath=true') && !isFullUrl) ? useRuntimeConfig().public.endPointUrl + endPointUrl : endPointUrl,
             {
                 onRequest({options}) {
                     // Set the request headers
@@ -79,6 +74,12 @@ export const callService = async (endPointUrl, method = 'POST',
         return fetch;
     } catch (e) {
         console.warn(e);
+        //check client
+        if (process.client) {
+            if (e?.response?.status === 401) {
+                location.href = "/login";
+            }
+        }
         throw ({
             statusCode: e?.response?.status,
             message: e?.response?._data?.error?.message || e?.response?._data?.message,

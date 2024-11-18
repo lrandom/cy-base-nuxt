@@ -2,7 +2,9 @@ import {post} from "~/composables/repositories/useService.js";
 
 const useAuthRepo = () => {
     const login = function (payload) {
-        return post("/auth/login", payload);
+        return post("login", {
+            ...payload
+        });
     };
 
     const logout = function () {
